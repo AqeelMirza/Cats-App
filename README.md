@@ -24,7 +24,7 @@ To build and run the CatList app, follow these steps:
 1. Clone this repository to your local machine.
 
    ```bash
-   git clone https://github.com/yourusername/catlist.git
+   git clone https://github.com/AqeelMirza/catlist.git
    ```
 
 2. Open the project in Android Studio.
