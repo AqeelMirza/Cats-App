@@ -7,7 +7,7 @@ CatList is an Android application that allows users to view a list of adorable c
 - Display a list of cats with their names and descriptions.
 - Implement MVVM architecture for a clean and maintainable codebase.
 - Use HILT (Hilt is the new Dagger) for Dependency Injection.
-- Manage dependencies using Gradle catelogs.
+- Manage dependencies using Gradle catalogs.
 - Utilize Jetpack Compose for building a modern and responsive UI.
 - Load cat images asynchronously using the Coil image loading library.
 - Includes unit tests for ViewModel and Repository classes.
@@ -77,6 +77,3 @@ This project was created with the help of various open-source libraries and reso
 
 Enjoy exploring the world of cats with the CatList app! If you have any questions or need assistance, feel free to reach out to us.
 
----
-
-**Disclaimer:** This README is a template and should be customized to reflect the specifics of your project. Update the content, add your own screenshots, and provide detailed information about your Android app.
