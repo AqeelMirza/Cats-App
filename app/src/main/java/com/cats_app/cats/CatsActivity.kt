@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.cats_app.ui.theme.CatsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,7 @@ class CatsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CatsAppTheme {
+                val viewModel: CatsViewModel = hiltViewModel()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

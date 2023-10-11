@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.converter)
     implementation(libs.coil)
     implementation(libs.hilt)
+    implementation(libs.hilt.compose.navigation)
     kapt(libs.hilt.compiler)
     annotationProcessor(libs.hilt.compiler)
 
