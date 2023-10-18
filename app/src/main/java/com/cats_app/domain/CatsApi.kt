@@ -1,7 +1,9 @@
 package com.cats_app.domain
 
 import com.cats_app.domain.data.Cat
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface CatsApi {
 
@@ -13,5 +15,8 @@ interface CatsApi {
 
     @GET("allCats")
     suspend fun getAllCats(): List<Cat>
+
+    @POST("/")
+    suspend fun addCat(@Body cat: Cat)
 
 }
