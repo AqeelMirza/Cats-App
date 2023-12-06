@@ -25,18 +25,28 @@ class CatsActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    if (viewModel.state.value.isError) {
-                        Toast.makeText(this, "some error", Toast.LENGTH_SHORT).show()
-                    }
-                    if (viewModel.state.value.isLoading) {
-                        CircularProgressIndicator()
-                    }
+                    when {
+                        viewModel.state.value.isError -> {
+                            CatPage(catsList = viewModel.state.value.catsList)
+                            Toast.makeText(this, "some error", Toast.LENGTH_SHORT).show()
+                        }
 
-                    CatPage(
-                        catsList = viewModel.state.value.catsList,
-                        addCat = { cat ->
-                            viewModel.addCat(cat)
-                        })
+                        viewModel.state.value.isLoading -> {
+                            CircularProgressIndicator()
+                        }
+
+                        viewModel.state.value.catsList.isEmpty() -> {
+                            CatPage(catsList = viewModel.state.value.catsList)
+                        }
+
+                        viewModel.state.value.catsList.isNotEmpty() -> {
+                            CatPage(
+                                catsList = viewModel.state.value.catsList,
+                                addCat = viewModel::addCat
+                            )
+                        }
+
+                    }
                 }
             }
         }

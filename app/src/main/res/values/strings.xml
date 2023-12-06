@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cats-App</string>
+    <string name="empty_list">Cats are playing outdoors and currently unavailable</string>
+    <string name="add_new_cat">You can always add new cats to the list by clicking \'+\' icon on the bottom right</string>
 </resources>
