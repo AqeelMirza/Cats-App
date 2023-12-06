@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cats_app.domain.data.Cat
+import com.cats_app.domain.data.ImageDataSource
 import com.cats_app.domain.repository.CatsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -29,6 +30,10 @@ class CatsViewModel @Inject constructor(
                 _state.value = state.value.copy(isLoading = true, isError = false)
                 repo.getCats()
             }.onSuccess { catsList ->
+                val images = ImageDataSource.images
+                catsList.forEach {
+                    it.image = images.random().toString()
+                }
                 _state.value =
                     state.value.copy(catsList = catsList, isLoading = false, isError = false)
             }.onFailure {
