@@ -5,16 +5,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cats_app.domain.CatsApi
 import com.cats_app.domain.data.Cat
+import com.cats_app.domain.repository.CatsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class CatsViewModel @Inject constructor(
-    private val api: CatsApi
+    private val repo: CatsRepo
 ) : ViewModel() {
 
     private val _state = mutableStateOf(CatState())
@@ -28,7 +27,7 @@ class CatsViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 _state.value = state.value.copy(isLoading = true, isError = false)
-                api.getAllCats()
+                repo.getCats()
             }.onSuccess { catsList ->
                 _state.value =
                     state.value.copy(catsList = catsList, isLoading = false, isError = false)
@@ -42,7 +41,7 @@ class CatsViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 _state.value = state.value.copy(isLoading = true, isError = false)
-                api.addCat(cat)
+                repo.addCat(cat)
             }.onSuccess {
                 getAllCats()
             }.onFailure {
