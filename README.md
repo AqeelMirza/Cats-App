@@ -31,6 +31,32 @@ To build and run the CatList app, follow these steps:
 
 3. Build and run the app on an Android emulator or physical device.
 
+## Running the Cat App
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/AqeelMirza/Cats-server
+    ```
+
+2. **Navigate to the project directory:**
+
+    ```bash
+    cd Cats-server
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4. **Start the server:**
+
+    ```bash
+    npm start
+    ```
+
 ## Usage
 
 Upon launching the CatList app, you will be presented with a list of cats along with their descriptions. You can scroll through the list to view more cats. There are no specific user actions required, as the app is designed for a simple viewing experience.
@@ -43,7 +69,6 @@ The following libraries and tools are used in this project:
 - [HILT](https://developer.android.com/training/dependency-injection/hilt-android) - For dependency injection.
 - [Gradle Catelogs](https://docs.gradle.org/current/userguide/dependency_catalogs.html) - To manage dependencies.
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) - For building the UI.
-- [Coil](https://coil-kt.github.io/coil/) - For image loading.
 - [JUnit](https://junit.org/junit5/) - For unit testing.
 - [Espresso](https://developer.android.com/training/testing/espresso) - For UI testing.
 
