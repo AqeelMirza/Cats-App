@@ -4,55 +4,66 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.cats_app.domain.data.Cat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddNewCat() {
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    modifier = Modifier.fillMaxWidth(), text = "Cats", color = Color.White
-                )
-            }, colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = Color(103, 58, 183, 255)
-            )
-        )
-    }, content = { padding ->
-        Column(
+fun AddNewCat(addCat: (Cat) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = CenterHorizontally
+    ) {
+        OutlinedTextField(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            value = "new cat",
+            onValueChange = { },
+            label = { Text("Cat Name") }
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = "",
+            onValueChange = { },
+            label = { Text("Cat Description") }
+        )
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            value = "",
+            onValueChange = { },
+            label = { Text("Cat Image") }
+        )
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(),
+            onClick = {
+                // TODO - addCat logic
+            }
         ) {
-
-            OutlinedTextField(
-                value = "cat",
-                onValueChange = { },
-                label = { Text("Cat Name") }
+            Text(
+                text = "Submit",
+                color = Color.White
             )
-
-            OutlinedTextField(
-                value = "",
-                onValueChange = { },
-                label = { Text("Cat Description") }
-            )
-
-            OutlinedTextField(
-                value = "",
-                onValueChange = { },
-                label = { Text("Cat Image") }
-            )
-
-
         }
-    })
+
+    }
 }
