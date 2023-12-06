@@ -23,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -75,11 +74,8 @@ fun EmptyPage() {
 
 @Composable
 private fun DisplayCats(catsList: List<Cat>) {
-    val cats =
-        listOf(R.drawable.cat1, R.drawable.cat2)
     LazyColumn {
         items(catsList) { cat ->
-            val image = remember { cats.random() }
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -89,7 +85,7 @@ private fun DisplayCats(catsList: List<Cat>) {
             ) {
                 Image(
                     modifier = Modifier.size(65.dp),
-                    painter = painterResource(id = image), contentDescription = null
+                    painter = painterResource(id = cat.image.toInt()), contentDescription = null
                 )
 
                 Text(

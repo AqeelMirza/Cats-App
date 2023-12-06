@@ -1,4 +1,7 @@
 package com.cats_app.domain.data
 
-class ImageDataSource {
+import com.cats_app.R
+
+object ImageDataSource {
+    val images = listOf(R.drawable.cat1, R.drawable.cat2)
 }
