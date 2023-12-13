@@ -7,3 +7,9 @@ data class CatState(
     val catsList: List<Cat> = emptyList(),
     val isError: Boolean = false
 )
+
+data class AddCatState(
+    val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val isError: Boolean = false,
+)
