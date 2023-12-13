@@ -17,12 +17,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -33,18 +35,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.cats_app.R
+import com.cats_app.cats.CatsViewModel
 import com.cats_app.domain.data.Cat
 
 @Composable
-fun CatPage(
-    catsList: List<Cat>
-) {
-    Column(
-        modifier = Modifier.fillMaxSize()) {
-        if (catsList.isEmpty()) {
+fun CatStartPage(viewModel: CatsViewModel) {
+    LaunchedEffect(Unit) {
+        viewModel.getAllCats()
+    }
+
+    when {
+        viewModel.state.value.isError -> {
             EmptyPage()
-        } else {
-            DisplayCats(catsList)
+        }
+
+        viewModel.state.value.isLoading -> {
+            CircularProgressIndicator()
+        }
+
+        else -> {
+            DisplayCats(catsList = viewModel.state.value.catsList)
         }
     }
 }

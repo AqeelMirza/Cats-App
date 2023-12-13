@@ -20,12 +20,12 @@ class CatsViewModel @Inject constructor(
     private val _state = mutableStateOf(CatState())
     val state: State<CatState> = _state
 
-    init {
-        getAllCats()
-    }
+    private val _addCatState = mutableStateOf(AddCatState())
+    val addCatState: State<AddCatState> = _addCatState
 
-    private fun getAllCats() {
+    fun getAllCats() {
         viewModelScope.launch {
+            _addCatState.value = AddCatState()
             runCatching {
                 _state.value = state.value.copy(isLoading = true, isError = false)
                 repo.getCats()
@@ -45,16 +45,14 @@ class CatsViewModel @Inject constructor(
     fun addCat(cat: Cat) {
         viewModelScope.launch {
             runCatching {
-                _state.value = state.value.copy(isLoading = true, isError = false)
+                _addCatState.value = addCatState.value.copy(isLoading = true, isError = false)
                 repo.addCat(cat)
             }.onSuccess {
-                getAllCats()
+                _addCatState.value = addCatState.value.copy(isLoading = false, isSuccess = true)
             }.onFailure {
                 Log.e("error", it.stackTraceToString())
-                _state.value = state.value.copy(isLoading = false, isError = true)
+                _addCatState.value = addCatState.value.copy(isLoading = false, isError = true)
             }
         }
     }
-
-
 }
