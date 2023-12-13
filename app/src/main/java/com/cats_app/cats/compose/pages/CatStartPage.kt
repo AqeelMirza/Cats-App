@@ -1,7 +1,8 @@
-package com.cats_app.cats.compose
+package com.cats_app.cats.compose.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -34,12 +35,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.cats_app.R
 import com.cats_app.cats.CatsViewModel
 import com.cats_app.domain.data.Cat
 
 @Composable
-fun CatStartPage(viewModel: CatsViewModel) {
+fun CatStartPage(navController: NavHostController, viewModel: CatsViewModel) {
     LaunchedEffect(Unit) {
         viewModel.getAllCats()
     }
@@ -54,7 +56,10 @@ fun CatStartPage(viewModel: CatsViewModel) {
         }
 
         else -> {
-            DisplayCats(catsList = viewModel.state.value.catsList)
+            val cats = viewModel.state.value.catsList
+            DisplayCats(catsList = cats){
+                //navController.navigate() - add navigation to cat details
+            }
         }
     }
 }
@@ -83,14 +88,15 @@ fun EmptyPage() {
 }
 
 @Composable
-private fun DisplayCats(catsList: List<Cat>) {
+private fun DisplayCats(catsList: List<Cat>, onClick: () -> Unit) {
     LazyColumn {
         items(catsList) { cat ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
-                    .height(intrinsicSize = IntrinsicSize.Max),
+                    .height(intrinsicSize = IntrinsicSize.Max)
+                    .clickable { onClick() }
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Image(

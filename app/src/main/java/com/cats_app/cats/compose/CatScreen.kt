@@ -26,6 +26,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cats_app.R
 import com.cats_app.cats.CatsViewModel
+import com.cats_app.cats.compose.pages.AddNewCat
+import com.cats_app.cats.compose.pages.CatStartPage
+import com.cats_app.cats.compose.pages.FloatingAddButton
 
 enum class CatScreen(@StringRes val title: Int) {
     Start(title = R.string.cat_title),
@@ -65,12 +68,10 @@ fun CatApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = CatScreen.Start.name) {
-                CatStartPage(viewModel)
+                CatStartPage(navController,viewModel)
             }
             composable(route = CatScreen.AddNewCat.name) {
-                AddNewCat(navController, viewModel) { cat ->
-                    viewModel.addCat(cat)
-                }
+                AddNewCat(navController, viewModel)
             }
         }
     }

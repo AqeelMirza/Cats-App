@@ -1,4 +1,4 @@
-package com.cats_app.cats.compose
+package com.cats_app.cats.compose.pages
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -29,9 +29,8 @@ import com.cats_app.domain.data.Cat
 
 
 @Composable
-fun AddNewCat(navController: NavHostController, viewModel: CatsViewModel, addCat: (Cat) -> Unit) {
+fun AddNewCat(navController: NavHostController, viewModel: CatsViewModel) {
     val context = LocalContext.current
-    AddCatView(addCat)
     when {
         viewModel.addCatState.value.isLoading -> {
             CircularProgressIndicator()
@@ -46,7 +45,9 @@ fun AddNewCat(navController: NavHostController, viewModel: CatsViewModel, addCat
             Toast.makeText(context, "Failed to add", Toast.LENGTH_SHORT).show()
         }
     }
-
+    AddCatView { cat ->
+        viewModel.addCat(cat)
+    }
 }
 
 @Composable
